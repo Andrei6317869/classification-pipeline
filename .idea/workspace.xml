@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf18809b-c777-4911-90f8-a18ff86bfac0" name="Changes" comment="Created Dataset and other elements for exercise" />
+    <list default="true" id="cf18809b-c777-4911-90f8-a18ff86bfac0" name="Changes" comment="Part 1.1 (Dataset Created)">
+      <change afterPath="$PROJECT_DIR$/src/cluster_dbscan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,23 +21,28 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Andrei6317869"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Andrei6317869&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Andrei6317869/classification-pipeline.git",
-    "accountId": "871c7cdc-8907-4e86-b263-f75ce51a075e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Andrei6317869/classification-pipeline.git&quot;,
+    &quot;accountId&quot;: &quot;871c7cdc-8907-4e86-b263-f75ce51a075e&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="3Jgwpu46f01yPLRAyrLdvWLl3S5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,10 +50,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.cluster_dbscan.executor": "Run",
     "Python.generate_dataset.executor": "Run",
     "Python.pipeline_common.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true"
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "part1-clustering"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -71,7 +82,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790168874000</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Part 1.1 (Dataset Created)">
+      <option name="closed" value="true" />
+      <created>1790182438975</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1790182438975</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,6 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created Dataset and other elements for exercise" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Dataset and other elements for exercise" />
+    <MESSAGE value="Part 1.1 (Dataset Created)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Part 1.1 (Dataset Created)" />
   </component>
 </project>

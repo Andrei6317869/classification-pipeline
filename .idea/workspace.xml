@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf18809b-c777-4911-90f8-a18ff86bfac0" name="Changes" comment="Part 1.1 (Dataset Created)">
-      <change afterPath="$PROJECT_DIR$/src/cluster_dbscan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bandwidth_sweep.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/kde_class_contours.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/kde_total_surface.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,12 +53,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.bandwidth_sweep.executor": "Run",
     "Python.cluster_dbscan.executor": "Run",
     "Python.generate_dataset.executor": "Run",
+    "Python.kde_class_contours.executor": "Run",
+    "Python.kde_total_surface.executor": "Run",
     "Python.pipeline_common.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "part1-clustering"
+    "git-widget-placeholder": "part2-density"
   }
 }]]></component>
   <component name="SharedIndexes">

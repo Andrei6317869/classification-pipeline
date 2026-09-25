@@ -1,1 +1,50 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+ 
+\title{Byte-Table Lookup Algorithm for Deploying Density-Based \\
+       Classifiers on Memory-Constrained Devices}
+\author{Andrei Prodan \\ Department of Computer Engineering Technology, Vanier College}
+\date{25-09-2026}
+ 
+\begin{document}
+\maketitle
+ 
+\section{Proposed Pipeline}
 
+ Before beginning, this proposed pipeline does not involve the \emph{offline} process generated on a local system. Clustering (DBSCAN), kernel density estimation, normalization and building the byte tables are all assumed completed before ever reaching the \emph{online} process running on an external peripheral, which is our proposed pipeline that is solely inference and not training as well. The pipeline, which is logically demonstrated by ~\ref{alg:lookup}, requires certain inputs to function. The inputs are what was generated \emph{offline} mixed in with acquired data, meaning the pipeline uses a raw query point, the K byte tables, the scaling bounds, grid size G and threshold $\tau$. By using these inputs, a class label or UNKNOWN is outputted to classify the inputted point.
+\begin{algorithm}[!bt]
+\caption{Table-lookup classification (online path).}
+\label{alg:lookup}
+\begin{algorithmic}[1]
+\Require A raw query point $(x,y)$
+\Require One byte table $Q_c$ per class $c$, each $G \times G$, values $0$--$255$
+\Require Scaling bounds $(x_{\min},x_{\max})$, $(y_{\min},y_{\max})$
+\Require Grid size $G$ and reject threshold $\tau$
+\Ensure A predicted class $\hat{c}$, or \textsc{unknown}
+\State $\tilde{x} \gets \dfrac{x - x_{\min}}{x_{\max}-x_{\min}}$,\quad
+       $\tilde{y} \gets \dfrac{y - y_{\min}}{y_{\max}-y_{\min}}$
+\State $\text{col} \gets \lfloor \tilde{x}\,G \rfloor$, clipped to $[0,G-1]$
+\State $\text{row} \gets \lfloor \tilde{y}\,G \rfloor$, clipped to $[0,G-1]$
+\For{each class $c$}
+    \State $v_c \gets Q_c[\text{row},\text{col}] / 255$ \Comment{one byte read}
+\EndFor
+\State $\hat{c} \gets \arg\max_c v_c$ \Comment{the winning class}
+\If{$v_{\hat{c}} < \tau$}
+    \State \Return \textsc{unknown} \Comment{outside every learned region}
+\EndIf
+\State $p_c \gets v_c / \sum_k v_k$ for each $c$ \Comment{optional: confidence}
+\State \Return $\hat{c}$ (with distribution $p$)
+\end{algorithmic}
+\end{algorithm}
+ 
+\subsection{Refinements}
+Between Nearest-cell and Bilinear lookup, I would propose the use of Nearest-cell since it is 4x fewer flash reads per query. In a limited flash memory environment, consuming less memory is an inherent up-side, so between two options where confidence is more important than smoothness, choosing $K$ cost over $4K$ cost is a valid decision. Moreover, both options usually agree on the same outcomes, but may differ when dealing with edge cells.
+As for the reject threshold, it is not optional because a value in a low enough part of the byte tables should not be allowed to be a specific class without being in an actually dense area. Also, for certain cluster shapes like the ring, no reject threshold could make it so points in the center could be considered a valid position to get the label, which goes against the fact the center of a ring cluster shouldn't be included in the cluster.
+\end{document}

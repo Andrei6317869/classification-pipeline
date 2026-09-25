@@ -47,4 +47,40 @@
 \subsection{Refinements}
 Between Nearest-cell and Bilinear lookup, I would propose the use of Nearest-cell since it is 4x fewer flash reads per query. In a limited flash memory environment, consuming less memory is an inherent up-side, so between two options where confidence is more important than smoothness, choosing $K$ cost over $4K$ cost is a valid decision. Moreover, both options usually agree on the same outcomes, but may differ when dealing with edge cells.
 As for the reject threshold, it is not optional because a value in a low enough part of the byte tables should not be allowed to be a specific class without being in an actually dense area. Also, for certain cluster shapes like the ring, no reject threshold could make it so points in the center could be considered a valid position to get the label, which goes against the fact the center of a ring cluster shouldn't be included in the cluster.
+
+% ---------------------------------------------------------------
+% SECTION 2 -- Application
+% Name ONE specific device/product. Not "embedded systems" generally.
+% ---------------------------------------------------------------
+\section{Application}
+ 
+A real-world application of this pipeline would be on a ATtiny85, which is a small microcontroller used on some Arduino boards. It has 8KB flash, 512 bytes SRAM and uses an 8-bit AVR core. Here are a few reasons why this chip would benefit from using the proposed pipeline:
+\begin{itemize}
+  \item \textbf{Flash budget}: The ATtiny85 has
+        8192 bytes of flash total, of which the 768-byte model is roughly a 9.4 percent slice. Using any of the other byte table storage types would over-consume the limited storage, like float32 with a 37.5 percent slice or float64 with a 75 percent slice. Under those conditions, if a bootloader is required, it would be very hard to do anything with an extra 512 bytes being consumed.
+  \item \textbf{Why no labelled training data}: It  takes too many resources to label each data point individually out in the field, so training using discovery would create organic connections that would mirror the real-world usage of the ATtiny85.
+  \item \textbf{Why the classes wouldn't be round}: Let's say that you are collecting data with the ATtiny85, the temperature data has a tendency to curve from morning to night as the sun rises and sets. Most data gathering situations aren't round so why should the classes be as well? DBscan allows for classes to be the shape of the density cluster and not a center point like k-means which would cause these curved shapes to be treated as circles when classifying data.
+\end{itemize}
+ 
+% ---------------------------------------------------------------
+% SECTION 3 -- Method and setup
+% Enough detail that a reader could reproduce your figures/numbers.
+% ---------------------------------------------------------------
+\section{Method and Setup}
+ 
+[FILL IN: Describe, in prose:
+\begin{itemize}
+  \item Dataset: The dataset being used is 1030 points, creating two crescents (340, 300) and
+        a ring (300) plus 90 uniform noise points. It is synthetic data using the fixed
+        seed \texttt{SEED = 20250903}]
+  \item Train/validation/test split: The dataset is split 60\%/20\%/20\%. The train set is what is used to generate the inference paths, with the validation set being use as reference during the training process to see how good it performs. The last set is the test set. The set is spent only once, the reason being that the test set can only be made up of data the system has never seen, else it would invalidate the test itself. So after running it once, the data cannot be reused to fulfill the same goal.
+  \item Feature scaling: min--max to $[0,1]^2$ using training bounds only
+  \item DBSCAN parameters: $\varepsilon = $ 0.6, $\text{min\_samples} = $
+        8, with a cluster count of 3 (cluster 0: 209, cluster 1: 198, cluster 2: 178) and 33 noise points
+  \item KDE bandwidth: $h = $ 0.05, selected on the
+        \emph{validation} split by mean log-likelihood
+        (Listing~5/\texttt{bandwidth\_sweep.py}) -- not eyeballed
+  \item Grid size: $G = 16$; storage format: \texttt{uint8}
+        (1 byte/cell); reject threshold: $\tau = 0.12$
+\end{itemize}]
 \end{document}
